@@ -17,7 +17,6 @@ m = n // (2 * w)
 
 expression = lambda x: x ** 4 * (1 + x ** 2) ** (-1)
 
-
 def integrate():
     sum = 0
     x = a + h
