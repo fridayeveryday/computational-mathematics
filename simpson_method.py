@@ -1,23 +1,14 @@
 import math
 
-# an increment of the integration step
-w = 1
 # a degree of the method
 p = 4
-# a range of the integration
-a = 1
-b = 2
 
-# a step
-h = 0.0625 * w
-# a number of steps
-n = 16
 
-m = n // (2 * w)
 
 expression = lambda x: x ** 4 * (1 + x ** 2) ** (-1)
 
-def integrate():
+
+def integrate(a,b, h):
     sum = 0
     x = a + h
     even = False
@@ -36,17 +27,29 @@ def integrate():
 
 
 def main():
+    # a range of the integration
+    a = int(input("Enter a start of a integration segment "))
+    b = int(input("Enter a end of a integration segment "))
+
+    n = input("Enter a number of steps ")
+    n = int(n)
+    if n % 4 != 0:
+        print("please enter a multiple of 4 number n")
+        return
+    h = (b - a) / n
+    print("a step of integration is ", h)
+    print(
+        "************************************************************************************************************")
     # a result with a unchanged step
-    res1 = integrate()
+    res1 = integrate(a,b,h)
     print("a result with the unchanged step is ", res1)
     print(
         "************************************************************************************************************")
-    global h, p
     h = h * 2
-    res2 = integrate()
+    res2 = integrate(a,b,h)
     print("a result with the unchanged step is ", res1)
     print("a result with the doubled step is   ", res2)
-    inaccuracy = (res1 - res2) / (2 ** p - 1)
+    inaccuracy = math.fabs(res1 - res2) / (2 ** p - 1)
     # get a degree of the first non zero digital
     degree = abs(int(math.log10(abs(inaccuracy))))
     # make a format string to output
